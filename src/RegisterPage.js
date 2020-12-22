@@ -33,7 +33,7 @@ const RegisterPage = () => {
             initialValues={{}}
             validationSchema={validationSchema}
             onSubmit={onSubmit}>
-            {({handleChange, setFieldValue, handleSubmit, errors, values}) => (
+            {({handleChange, setFieldValue, handleSubmit, touched, errors, values}) => (
                 <ScrollView>
                     <View style={styles.container}>
                         <Text style={styles.title}>Halo, <Text style={styles.bold}>Kawan</Text>!</Text>
@@ -42,44 +42,44 @@ const RegisterPage = () => {
                         {/*FORM START*/}
                         <Input
                             placeholder='Nama'
-                            errorMessage={errors.name}
+                            errorMessage={touched.name && errors.name ? errors.name :  null}
                             onChangeText={handleChange('name')}/>
                         <Input
                             placeholder='Email'
-                            errorMessage={errors.email}
+                            errorMessage={touched.email && errors.email ? errors.email :  null}
                             onChangeText={handleChange('email')}/>
                         <Input
                             placeholder='Umur'
-                            errorMessage={errors.age}
+                            errorMessage={touched.age && errors.age ? errors.age :  null}
                             keyboardType={'number-pad'}
                             onChangeText={handleChange('age')}/>
                         <Input
                             placeholder='Alamat'
-                            errorMessage={errors.address}
+                            errorMessage={touched.address && errors.address ? errors.address :  null}
                             onChangeText={handleChange('address')}/>
                         <Input
                             placeholder='No. HP'
-                            errorMessage={errors.phoneNumber}
+                            errorMessage={touched.phoneNumber && errors.phoneNumber ? errors.phoneNumber :  null}
                             onChangeText={handleChange('phoneNumber')}/>
                         <Input
                             placeholder='Hobi'
-                            errorMessage={errors.hobby}
+                            errorMessage={touched.hobby && errors.hobby ? errors.hobby :  null}
                             onChangeText={handleChange('hobby')}/>
                         <Input
                             placeholder='Makanan Favorit'
-                            errorMessage={errors.favFood}
+                            errorMessage={touched.favFood && errors.favFood ? errors.favFood :  null}
                             onChangeText={handleChange('favFood')}/>
                         <Input
                             placeholder='Minuman Favorit'
-                            errorMessage={errors.favBeverage}
+                            errorMessage={touched.favBeverage && errors.favBeverage ? errors.favBeverage :  null}
                             onChangeText={handleChange('favBeverage')}/>
                         <Input
                             placeholder='Buku Favorit'
-                            errorMessage={errors.favBook}
+                            errorMessage={touched.favBook && errors.favBook ? errors.favBook :  null}
                             onChangeText={handleChange('favBook')}/>
                         <Input
                             placeholder='Moto Hidup'
-                            errorMessage={errors.motto}
+                            errorMessage={touched.motto && errors.motto ? errors.motto :  null}
                             onChangeText={handleChange('motto')}/>
                         <CheckBox
                             title='Jomblo'
@@ -87,11 +87,11 @@ const RegisterPage = () => {
                             checked={values.jomblo}/>
                         <Input
                             placeholder='Password'
-                            errorMessage={errors.password}
+                            errorMessage={touched.password && errors.password ? errors.password :  null}
                             onChangeText={handleChange('password')}/>
                         <Input
                             placeholder='Konfirmasi Password'
-                            errorMessage={errors.confirmationPassword}
+                            errorMessage={touched.confirmationPassword && errors.confirmationPassword ? errors.confirmationPassword :  null}
                             onChangeText={handleChange('confirmationPassword')}/>
                         <Button title={'Daftar'} onPress={handleSubmit}/>
                     </View>
