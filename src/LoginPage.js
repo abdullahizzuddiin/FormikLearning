@@ -1,60 +1,51 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, ToastAndroid} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
+import {Formik} from 'formik';
+
 import request from './request';
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState({});
-
-    const validateForm = () => {
+    const validateForm = (values) => {
         const error = {};
-        let anyError = false;
 
-        if (!email) {
+        if (!values.email) {
             error.email = 'Harus diisi';
-            anyError = true;
         }
-        if (!password) {
+        if (!values.password) {
             error.password = 'Harus diisi';
-            anyError = true;
         }
 
-        if (anyError) {
-            setError(error);
-            throw error;
-        }
+        return error;
     };
 
-    const onSubmit = async () => {
-        try {
-            validateForm();
-            setError({});
-            const response = await request('Login');
-            ToastAndroid.show(response, ToastAndroid.SHORT);
-        } catch (e) {
-            console.log('Ada error');
-        }
+    const onSubmit = async (values) => {
+        const response = await request('Login', values);
+        ToastAndroid.show(response, ToastAndroid.SHORT);
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Selamat Datang Kembali,
-                <Text style={styles.bold}>Kawan</Text>!
-            </Text>
-
-            {/*FORM START*/}
-            <Input
-                placeholder='Email'
-                onChangeText={setEmail}
-                errorMessage={error.email}/>
-            <Input
-                placeholder='Password'
-                onChangeText={setPassword}
-                errorMessage={error.password} secureTextEntry/>
-            <Button title={'Login'} onPress={onSubmit}/>
-        </View>
+        <Formik
+            initialValues={{email: '', password: ''}}
+            validate={validateForm}
+            onSubmit={onSubmit}>
+            {({handleChange, handleSubmit, errors}) => (
+                <View style={styles.container}>
+                    <Text style={styles.title}>Selamat Datang Kembali,
+                        <Text style={styles.bold}> Kawan</Text>!
+                    </Text>
+                    <Input
+                        placeholder='Email'
+                        onChangeText={handleChange('email')}
+                        errorMessage={errors.email}/>
+                    <Input
+                        placeholder='Password'
+                        onChangeText={handleChange('password')}
+                        errorMessage={errors.password} secureTextEntry/>
+                    <Button title={'Login'} onPress={handleSubmit}/>
+                </View>
+            )}
+        </Formik>
     );
 };
 
