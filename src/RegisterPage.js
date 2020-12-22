@@ -8,6 +8,7 @@ import * as yup from 'yup';
 const validationSchema = yup.object().shape({
     name: yup.string().required('Wajib Diisi'),
     email: yup.string().required('Wajib Diisi'),
+    age: yup.number().typeError('Harus berupa angka').required('Wajib Diisi'),
     address: yup.string().required('Wajib Diisi'),
     phoneNumber: yup.string().required('Wajib Diisi'),
     hobby: yup.string().required('Wajib Diisi'),
@@ -47,6 +48,11 @@ const RegisterPage = () => {
                             placeholder='Email'
                             errorMessage={errors.email}
                             onChangeText={handleChange('email')}/>
+                        <Input
+                            placeholder='Umur'
+                            errorMessage={errors.age}
+                            keyboardType={'number-pad'}
+                            onChangeText={handleChange('age')}/>
                         <Input
                             placeholder='Alamat'
                             errorMessage={errors.address}
