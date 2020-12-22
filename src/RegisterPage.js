@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet, ToastAndroid} from 'react-native';
-import {Input, Button, Text} from 'react-native-elements';
+import {Input, Button, Text, CheckBox} from 'react-native-elements';
 import request from './request';
 import {Formik} from 'formik';
 
@@ -43,7 +43,7 @@ const RegisterPage = () => {
             initialValues={{}}
             validate={validateForm}
             onSubmit={onSubmit}>
-            {({handleChange, handleSubmit, errors}) => (
+            {({handleChange, setFieldValue, handleSubmit, errors, values}) => (
                 <ScrollView>
                     <View style={styles.container}>
                         <Text style={styles.title}>Halo, <Text style={styles.bold}>Kawan</Text>!</Text>
@@ -86,6 +86,10 @@ const RegisterPage = () => {
                             placeholder='Moto Hidup'
                             errorMessage={errors.motto}
                             onChangeText={handleChange('motto')}/>
+                        <CheckBox
+                            title='Jomblo'
+                            onPress={() => {setFieldValue('jomblo', !values.jomblo)}}
+                            checked={values.jomblo}/>
                         <Input
                             placeholder='Password'
                             errorMessage={errors.password}
