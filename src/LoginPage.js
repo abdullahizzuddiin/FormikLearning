@@ -2,23 +2,16 @@ import React from 'react';
 import {View, StyleSheet, ToastAndroid} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import {Formik} from 'formik';
+import * as yup from 'yup';
 
 import request from './request';
 
+const validationSchema = yup.object({
+    email: yup.string().required('Email wajib diisi'),
+    password: yup.string().required('Password wajib diisi')
+});
+
 const LoginPage = () => {
-    const validateForm = (values) => {
-        const error = {};
-
-        if (!values.email) {
-            error.email = 'Harus diisi';
-        }
-        if (!values.password) {
-            error.password = 'Harus diisi';
-        }
-
-        return error;
-    };
-
     const onSubmit = async (values) => {
         const response = await request('Login', values);
         ToastAndroid.show(response, ToastAndroid.SHORT);
@@ -27,7 +20,7 @@ const LoginPage = () => {
     return (
         <Formik
             initialValues={{email: '', password: ''}}
-            validate={validateForm}
+            validationSchema={validationSchema}
             onSubmit={onSubmit}>
             {({handleChange, handleSubmit, errors}) => (
                 <View style={styles.container}>
