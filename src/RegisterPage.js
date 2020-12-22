@@ -1,152 +1,104 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, ScrollView, StyleSheet, ToastAndroid} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import request from './request';
+import {Formik} from 'formik';
 
 const RegisterPage = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [hobby, setHobby] = useState('');
-    const [favFood, setFavFood] = useState('');
-    const [favBeverage, setFavBeverage] = useState('');
-    const [favBook, setFavBook] = useState('');
-    const [motto, setMotto] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmationPassword, setConfirmationPassword] = useState('');
-    const [error, setError] = useState({});
-
-    const validateForm = () => {
+    const validateForm = (values) => {
         const error = {};
-        let anyError = false;
 
-        if (!name) {
-            error.name = 'harus diisi';
-            anyError = true;
-        }
+        if (!values.name) error.name = 'harus diisi';
 
-        if (!email) {
-            error.email = 'harus diisi';
-            anyError = true;
-        }
+        if (!values.email) error.email = 'harus diisi';
 
-        if (!address) {
-            error.address = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.address) error.address = 'Harus diisi';
 
-        if (!phoneNumber) {
-            error.phoneNumber = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.phoneNumber) error.phoneNumber = 'Harus diisi';
 
-        if (!hobby) {
-            error.hobby = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.hobby) error.hobby = 'Harus diisi';
 
-        if (!favFood) {
-            error.favFood = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.favFood) error.favFood = 'Harus diisi';
 
-        if (!favBeverage) {
-            error.favBeverage = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.favBeverage) error.favBeverage = 'Harus diisi';
 
-        if (!favBook) {
-            error.favBook = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.favBook) error.favBook = 'Harus diisi';
 
-        if (!motto) {
-            error.motto = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.motto) error.motto = 'Harus diisi';
 
-        if (!password) {
-            error.password = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.password) error.password = 'Harus diisi';
 
-        if (!confirmationPassword) {
-            error.confirmationPassword = 'Harus diisi';
-            anyError = true;
-        }
+        if (!values.confirmationPassword) error.confirmationPassword = 'Harus diisi';
 
-        if (anyError) {
-            setError(error);
-            throw error;
-        }
+        return error;
     };
 
-    const onSubmit = async () => {
-        try {
-            validateForm();
-            setError({});
-            const response = await request('Register');
-            ToastAndroid.show(response, ToastAndroid.SHORT);
-        } catch (e) {
-            console.log('Ada error');
-        }
+    const onSubmit = async (values) => {
+        const response = await request('Register', values);
+        ToastAndroid.show(response, ToastAndroid.SHORT);
     };
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Text style={styles.title}>Halo, <Text style={styles.bold}>Kawan</Text>!</Text>
-                <Text style={styles.subtitle}>Isi form ini dengan data yang benar ya. </Text>
+        <Formik
+            initialValues={{}}
+            validate={validateForm}
+            onSubmit={onSubmit}>
+            {({handleChange, handleSubmit, errors}) => (
+                <ScrollView>
+                    <View style={styles.container}>
+                        <Text style={styles.title}>Halo, <Text style={styles.bold}>Kawan</Text>!</Text>
+                        <Text style={styles.subtitle}>Isi form ini dengan data yang benar ya. </Text>
 
-                {/*FORM START*/}
-                <Input
-                    placeholder='Nama'
-                    errorMessage={error.name}
-                    onChangeText={setName}/>
-                <Input
-                    placeholder='Email'
-                    errorMessage={error.email}
-                    onChangeText={setEmail}/>
-                <Input
-                    placeholder='Alamat'
-                    errorMessage={error.address}
-                    onChangeText={setAddress}/>
-                <Input
-                    placeholder='No. HP'
-                    errorMessage={error.phoneNumber}
-                    onChangeText={setPhoneNumber}/>
-                <Input
-                    placeholder='Hobi'
-                    errorMessage={error.hobby}
-                    onChangeText={setHobby}/>
-                <Input
-                    placeholder='Makanan Favorit'
-                    errorMessage={error.favFood}
-                    onChangeText={setFavFood}/>
-                <Input
-                    placeholder='Minuman Favorit'
-                    errorMessage={error.favBeverage}
-                    onChangeText={setFavBeverage}/>
-                <Input
-                    placeholder='Buku Favorit'
-                    errorMessage={error.favBook}
-                    onChangeText={setFavBook}/>
-                <Input
-                    placeholder='Moto Hidup'
-                    errorMessage={error.motto}
-                    onChangeText={setMotto}/>
-                <Input
-                    placeholder='Password'
-                    errorMessage={error.password}
-                    onChangeText={setPassword}/>
-                <Input
-                    placeholder='Konfirmasi Password'
-                    errorMessage={error.confirmationPassword}
-                    onChangeText={setConfirmationPassword}/>
-                <Button title={'Daftar'} onPress={onSubmit}/>
-            </View>
-        </ScrollView>
+                        {/*FORM START*/}
+                        <Input
+                            placeholder='Nama'
+                            errorMessage={errors.name}
+                            onChangeText={handleChange('name')}/>
+                        <Input
+                            placeholder='Email'
+                            errorMessage={errors.email}
+                            onChangeText={handleChange('email')}/>
+                        <Input
+                            placeholder='Alamat'
+                            errorMessage={errors.address}
+                            onChangeText={handleChange('address')}/>
+                        <Input
+                            placeholder='No. HP'
+                            errorMessage={errors.phoneNumber}
+                            onChangeText={handleChange('phoneNumber')}/>
+                        <Input
+                            placeholder='Hobi'
+                            errorMessage={errors.hobby}
+                            onChangeText={handleChange('hobby')}/>
+                        <Input
+                            placeholder='Makanan Favorit'
+                            errorMessage={errors.favFood}
+                            onChangeText={handleChange('favFood')}/>
+                        <Input
+                            placeholder='Minuman Favorit'
+                            errorMessage={errors.favBeverage}
+                            onChangeText={handleChange('favBeverage')}/>
+                        <Input
+                            placeholder='Buku Favorit'
+                            errorMessage={errors.favBook}
+                            onChangeText={handleChange('favBook')}/>
+                        <Input
+                            placeholder='Moto Hidup'
+                            errorMessage={errors.motto}
+                            onChangeText={handleChange('motto')}/>
+                        <Input
+                            placeholder='Password'
+                            errorMessage={errors.password}
+                            onChangeText={handleChange('password')}/>
+                        <Input
+                            placeholder='Konfirmasi Password'
+                            errorMessage={errors.confirmationPassword}
+                            onChangeText={handleChange('confirmationPassword')}/>
+                        <Button title={'Daftar'} onPress={handleSubmit}/>
+                    </View>
+                </ScrollView>
+            )}
+        </Formik>
     );
 };
 
