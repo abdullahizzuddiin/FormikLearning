@@ -5,6 +5,23 @@ import request from './request';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
+const initialValues = {
+    name: '',
+    email: '',
+    age: '',
+    address: '',
+    phoneNumber: '',
+    hobby: '',
+    favFood: '',
+    favBeverage: '',
+    favBook: '',
+    motto: '',
+    jomblo: false,
+    spouseName: '',
+    password: '',
+    confirmationPassword: '',
+};
+
 const validationSchema = yup.object().shape({
     name: yup.string().required('Wajib Diisi'),
     email: yup.string().required('Wajib Diisi'),
@@ -30,10 +47,10 @@ const RegisterPage = () => {
 
     return (
         <Formik
-            initialValues={{}}
+            initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}>
-            {({handleChange, setFieldValue, handleSubmit, touched, errors, values}) => (
+            {({handleChange, setFieldValue, handleSubmit, handleBlur, touched, errors, values}) => (
                 <ScrollView>
                     <View style={styles.container}>
                         <Text style={styles.title}>Halo, <Text style={styles.bold}>Kawan</Text>!</Text>
@@ -43,44 +60,54 @@ const RegisterPage = () => {
                         <Input
                             placeholder='Nama'
                             errorMessage={touched.name && errors.name ? errors.name :  null}
-                            onChangeText={handleChange('name')}/>
+                            onChangeText={handleChange('name')}
+                            onBlur={handleBlur('name')}/>
                         <Input
                             placeholder='Email'
                             errorMessage={touched.email && errors.email ? errors.email :  null}
-                            onChangeText={handleChange('email')}/>
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}/>
                         <Input
                             placeholder='Umur'
                             errorMessage={touched.age && errors.age ? errors.age :  null}
                             keyboardType={'number-pad'}
-                            onChangeText={handleChange('age')}/>
+                            onChangeText={handleChange('age')}
+                            onBlur={handleBlur('age')}/>
                         <Input
                             placeholder='Alamat'
                             errorMessage={touched.address && errors.address ? errors.address :  null}
-                            onChangeText={handleChange('address')}/>
+                            onChangeText={handleChange('address')}
+                            onBlur={handleBlur('address')}/>
                         <Input
                             placeholder='No. HP'
                             errorMessage={touched.phoneNumber && errors.phoneNumber ? errors.phoneNumber :  null}
-                            onChangeText={handleChange('phoneNumber')}/>
+                            onChangeText={handleChange('phoneNumber')}
+                            onBlur={handleBlur('phoneNumber')}/>
                         <Input
                             placeholder='Hobi'
                             errorMessage={touched.hobby && errors.hobby ? errors.hobby :  null}
-                            onChangeText={handleChange('hobby')}/>
+                            onChangeText={handleChange('hobby')}
+                            onBlur={handleBlur('hobby')}/>
                         <Input
                             placeholder='Makanan Favorit'
                             errorMessage={touched.favFood && errors.favFood ? errors.favFood :  null}
-                            onChangeText={handleChange('favFood')}/>
+                            onChangeText={handleChange('favFood')}
+                            onBlur={handleBlur('favFood')}/>
                         <Input
                             placeholder='Minuman Favorit'
                             errorMessage={touched.favBeverage && errors.favBeverage ? errors.favBeverage :  null}
-                            onChangeText={handleChange('favBeverage')}/>
+                            onChangeText={handleChange('favBeverage')}
+                            onBlur={handleBlur('favBeverage')}/>
                         <Input
                             placeholder='Buku Favorit'
                             errorMessage={touched.favBook && errors.favBook ? errors.favBook :  null}
-                            onChangeText={handleChange('favBook')}/>
+                            onChangeText={handleChange('favBook')}
+                            onBlur={handleBlur('favBook')}/>
                         <Input
                             placeholder='Moto Hidup'
                             errorMessage={touched.motto && errors.motto ? errors.motto :  null}
-                            onChangeText={handleChange('motto')}/>
+                            onChangeText={handleChange('motto')}
+                            onBlur={handleBlur('motto')}/>
                         <CheckBox
                             title='Jomblo'
                             onPress={() => {setFieldValue('jomblo', !values.jomblo)}}
@@ -88,11 +115,13 @@ const RegisterPage = () => {
                         <Input
                             placeholder='Password'
                             errorMessage={touched.password && errors.password ? errors.password :  null}
-                            onChangeText={handleChange('password')}/>
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}/>
                         <Input
                             placeholder='Konfirmasi Password'
                             errorMessage={touched.confirmationPassword && errors.confirmationPassword ? errors.confirmationPassword :  null}
-                            onChangeText={handleChange('confirmationPassword')}/>
+                            onChangeText={handleChange('confirmationPassword')}
+                            onBlur={handleBlur('confirmationPassword')}/>
                         <Button title={'Daftar'} onPress={handleSubmit}/>
                     </View>
                 </ScrollView>
