@@ -42,7 +42,9 @@ const validationSchema = yup.object().shape({
             otherwise: yup.string().notRequired()
         }),
     password: yup.string().required('Wajib Diisi'),
-    confirmationPassword: yup.string().required('Wajib Diisi'),
+    confirmationPassword: yup
+        .string()
+        .oneOf([yup.ref('password'), null], 'Password harus sama.'),
 });
 
 
