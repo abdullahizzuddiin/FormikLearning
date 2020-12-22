@@ -3,36 +3,25 @@ import {View, ScrollView, StyleSheet, ToastAndroid} from 'react-native';
 import {Input, Button, Text, CheckBox} from 'react-native-elements';
 import request from './request';
 import {Formik} from 'formik';
+import * as yup from 'yup';
+
+const validationSchema = yup.object().shape({
+    name: yup.string().required('Wajib Diisi'),
+    email: yup.string().required('Wajib Diisi'),
+    address: yup.string().required('Wajib Diisi'),
+    phoneNumber: yup.string().required('Wajib Diisi'),
+    hobby: yup.string().required('Wajib Diisi'),
+    favFood: yup.string().required('Wajib Diisi'),
+    favBeverage: yup.string().required('Wajib Diisi'),
+    favBook: yup.string().required('Wajib Diisi'),
+    motto: yup.string().required('Wajib Diisi'),
+    jomblo: yup.boolean().required('Wajib Diisi'),
+    password: yup.string().required('Wajib Diisi'),
+    confirmationPassword: yup.string().required('Wajib Diisi'),
+});
+
 
 const RegisterPage = () => {
-    const validateForm = (values) => {
-        const error = {};
-
-        if (!values.name) error.name = 'harus diisi';
-
-        if (!values.email) error.email = 'harus diisi';
-
-        if (!values.address) error.address = 'Harus diisi';
-
-        if (!values.phoneNumber) error.phoneNumber = 'Harus diisi';
-
-        if (!values.hobby) error.hobby = 'Harus diisi';
-
-        if (!values.favFood) error.favFood = 'Harus diisi';
-
-        if (!values.favBeverage) error.favBeverage = 'Harus diisi';
-
-        if (!values.favBook) error.favBook = 'Harus diisi';
-
-        if (!values.motto) error.motto = 'Harus diisi';
-
-        if (!values.password) error.password = 'Harus diisi';
-
-        if (!values.confirmationPassword) error.confirmationPassword = 'Harus diisi';
-
-        return error;
-    };
-
     const onSubmit = async (values) => {
         const response = await request('Register', values);
         ToastAndroid.show(response, ToastAndroid.SHORT);
@@ -41,7 +30,7 @@ const RegisterPage = () => {
     return (
         <Formik
             initialValues={{}}
-            validate={validateForm}
+            validationSchema={validationSchema}
             onSubmit={onSubmit}>
             {({handleChange, setFieldValue, handleSubmit, errors, values}) => (
                 <ScrollView>
