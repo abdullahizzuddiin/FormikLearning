@@ -17,6 +17,6 @@ This repo contains only two branches: `master` and `finish`.
 ### Learning
 I tried to document this project as clean as possible. You can follow my step in building this project by looking at the commit history. Just open commit history page to see that.
 
-You can read my written-tutorial on [Medium](#). But, if you are visual people, you can follow my video-tutorial on [Youtube](#)
+You can read my written-tutorial on [Medium](https://dinjudin.medium.com/mudah-membuat-form-dengan-formik-x-yup-di-react-native-f1ea9399bd91). But, if you are visual people, you can follow my video-tutorial on [Youtube](#)
 
 Keep Coding!
