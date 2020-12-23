@@ -22,7 +22,7 @@ const initialValues = {
     confirmationPassword: '',
 };
 
-const validationSchema = yup.object().shape({
+const validationSchema = yup.object({
     name: yup.string().required('Wajib Diisi'),
     email: yup.string().required('Wajib Diisi'),
     age: yup.number().typeError('Harus berupa angka').required('Wajib Diisi'),
