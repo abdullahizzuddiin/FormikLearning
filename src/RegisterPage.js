@@ -25,6 +25,13 @@ const validationSchema = yup.object({
     favBook: yup.string().required('Wajib diisi yup'),
     motto: yup.string().required('Wajib diisi yup'),
     jomblo: yup.boolean().required('Wajib diisi yup'),
+    spouse: yup
+        .string()
+        .when('jomblo', {
+            is: isJomblo => !isJomblo,
+            then: yup.string().required('Nama pasangan wajib diisi'),
+            otherwise: yup.string().notRequired()
+        }),
     password: yup.string().required('Wajib diisi yup'),
     confirmationPassword: yup.string().required('Wajib diisi yup'),
 });
@@ -167,6 +174,17 @@ const RegisterPage = () => {
                             title='Jomblo'
                             onPress={() => onChange(!value)}
                             checked={value}/>
+                    )}/>
+                <Controller
+                    name={'spouse'}
+                    defaultValue={''}
+                    control={control}
+                    render={({onChange, onBlur}) => (
+                        <Input
+                            placeholder='Nama Pasangan'
+                            errorMessage={errors.spouse?.message}
+                            onBlur={onBlur}
+                            onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'password'}
