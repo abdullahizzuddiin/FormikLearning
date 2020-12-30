@@ -49,17 +49,18 @@ const RegisterPage = () => {
                     name={'name'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Nama'
                             errorMessage={errors.name?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'age'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Umur'
                             onBlur={event => onBlur(event)}
@@ -70,100 +71,110 @@ const RegisterPage = () => {
                     name={'email'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Email'
                             errorMessage={errors.email?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'address'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Alamat'
                             errorMessage={errors.address?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'phoneNumber'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='No. HP'
                             errorMessage={errors.phoneNumber?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'hobby'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Hobi'
                             errorMessage={errors.hobby?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'favFood'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Makanan Favorit'
                             errorMessage={errors.favFood?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'favBeverage'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Minuman Favorit'
                             errorMessage={errors.favBeverage?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'favBook'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Buku Favorit'
                             errorMessage={errors.favBook?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'motto'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Moto Hidup'
                             errorMessage={errors.motto?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'password'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Password'
                             errorMessage={errors.password?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
                     name={'confirmationPassword'}
                     defaultValue={''}
                     control={control}
-                    render={({onChange}) => (
+                    render={({onChange, onBlur}) => (
                         <Input
                             placeholder='Konfirmasi Password'
                             errorMessage={errors.confirmationPassword?.message}
+                            onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Button title={'Daftar'} onPress={handleSubmit(onSubmit)}/>
