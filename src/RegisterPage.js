@@ -33,7 +33,9 @@ const validationSchema = yup.object({
             otherwise: yup.string().notRequired()
         }),
     password: yup.string().required('Wajib diisi yup'),
-    confirmationPassword: yup.string().required('Wajib diisi yup'),
+    confirmationPassword: yup
+        .string()
+        .oneOf([yup.ref('password'), null], 'Password harus sama.'),
 });
 
 const RegisterPage = () => {
