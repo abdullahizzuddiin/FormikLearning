@@ -17,12 +17,8 @@ const LoginPage = () => {
     });
 
     const onSubmit = async (value) => {
-        try {
-            const response = await request('Login', value);
-            ToastAndroid.show(response, ToastAndroid.SHORT);
-        } catch (e) {
-            console.log('Ada error');
-        }
+        const response = await request('Login', value);
+        ToastAndroid.show(response, ToastAndroid.SHORT);
     };
 
     return (
