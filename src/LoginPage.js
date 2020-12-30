@@ -2,11 +2,19 @@ import React from 'react';
 import {View, StyleSheet, ToastAndroid} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
 import {Controller, useForm} from 'react-hook-form';
-
+import {yupResolver} from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import request from './request';
 
+const validationSchema = yup.object({
+    email: yup.string().email().required('Wajib diisi bos'),
+    password: yup.string().required('Wajib diisi bos')
+});
+
 const LoginPage = () => {
-    const { control, handleSubmit, errors} = useForm();
+    const { control, handleSubmit, errors} = useForm({
+        resolver: yupResolver(validationSchema)
+    });
 
     const onSubmit = async (value) => {
         try {
@@ -28,7 +36,6 @@ const LoginPage = () => {
                 control={control}
                 name={'email'}
                 defaultValue={''}
-                rules={{required: 'Wajib diisi bos'}}
                 render={({onChange}) => (
                     <Input
                         placeholder='Email'
@@ -39,7 +46,6 @@ const LoginPage = () => {
                 control={control}
                 defaultValue={''}
                 name={'password'}
-                rules={{required: 'Wajib diisi bos'}}
                 render={({onChange}) => (
                     <Input
                         placeholder='Password'
