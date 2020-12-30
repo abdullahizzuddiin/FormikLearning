@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet, ToastAndroid} from 'react-native';
-import {Input, Button, Text} from 'react-native-elements';
+import {Input, Button, Text, CheckBox} from 'react-native-elements';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -24,6 +24,7 @@ const validationSchema = yup.object({
     favBeverage: yup.string().required('Wajib diisi yup'),
     favBook: yup.string().required('Wajib diisi yup'),
     motto: yup.string().required('Wajib diisi yup'),
+    jomblo: yup.boolean().required('Wajib diisi yup'),
     password: yup.string().required('Wajib diisi yup'),
     confirmationPassword: yup.string().required('Wajib diisi yup'),
 });
@@ -156,6 +157,16 @@ const RegisterPage = () => {
                             errorMessage={errors.motto?.message}
                             onBlur={onBlur}
                             onChangeText={val => onChange(val)}/>
+                    )}/>
+                <Controller
+                    name={'jomblo'}
+                    defaultValue={false}
+                    control={control}
+                    render={({onChange, value}) => (
+                        <CheckBox
+                            title='Jomblo'
+                            onPress={() => onChange(!value)}
+                            checked={value}/>
                     )}/>
                 <Controller
                     name={'password'}
