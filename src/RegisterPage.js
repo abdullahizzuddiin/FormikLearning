@@ -30,7 +30,9 @@ const validationSchema = yup.object({
 
 const RegisterPage = () => {
     const {control, handleSubmit, errors} = useForm({
-        resolver: yupResolver(validationSchema)
+        resolver: yupResolver(validationSchema),
+        mode: 'onBlur', //https://github.com/react-hook-form/react-hook-form/issues/283#issuecomment-610514235
+        reValidateMode: 'onBlur'
     });
 
     const onSubmit = async () => {
