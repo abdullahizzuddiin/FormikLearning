@@ -1,37 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, ToastAndroid} from 'react-native';
 import {Input, Button, Text} from 'react-native-elements';
+import {Controller, useForm} from 'react-hook-form';
+
 import request from './request';
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState({});
+    const { control, handleSubmit, errors} = useForm();
 
-    const validateForm = () => {
-        const error = {};
-        let anyError = false;
-
-        if (!email) {
-            error.email = 'Harus diisi';
-            anyError = true;
-        }
-        if (!password) {
-            error.password = 'Harus diisi';
-            anyError = true;
-        }
-
-        if (anyError) {
-            setError(error);
-            throw error;
-        }
-    };
-
-    const onSubmit = async () => {
+    const onSubmit = async (value) => {
         try {
-            validateForm();
-            setError({});
-            const response = await request('Login');
+            const response = await request('Login', value);
             ToastAndroid.show(response, ToastAndroid.SHORT);
         } catch (e) {
             console.log('Ada error');
@@ -45,15 +24,29 @@ const LoginPage = () => {
             </Text>
 
             {/*FORM START*/}
-            <Input
-                placeholder='Email'
-                onChangeText={setEmail}
-                errorMessage={error.email}/>
-            <Input
-                placeholder='Password'
-                onChangeText={setPassword}
-                errorMessage={error.password} secureTextEntry/>
-            <Button title={'Login'} onPress={onSubmit}/>
+            <Controller
+                control={control}
+                name={'email'}
+                defaultValue={''}
+                rules={{required: 'Wajib diisi bos'}}
+                render={({onChange}) => (
+                    <Input
+                        placeholder='Email'
+                        onChangeText={val => onChange(val)}
+                        errorMessage={errors.email?.message}/>
+                )}/>
+            <Controller
+                control={control}
+                defaultValue={''}
+                name={'password'}
+                rules={{required: 'Wajib diisi bos'}}
+                render={({onChange}) => (
+                    <Input
+                        placeholder='Password'
+                        onChangeText={val => onChange(val)}
+                        errorMessage={errors.password?.message} secureTextEntry/>
+                )}/>
+            <Button title={'Login'} onPress={handleSubmit(onSubmit)}/>
         </View>
     );
 };
