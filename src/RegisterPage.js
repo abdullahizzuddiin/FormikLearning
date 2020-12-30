@@ -51,7 +51,7 @@ const RegisterPage = () => {
                     name={'email'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Email'
                             errorMessage={errors.email?.message}
@@ -61,7 +61,7 @@ const RegisterPage = () => {
                     name={'address'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Alamat'
                             errorMessage={errors.address?.message}
@@ -71,7 +71,7 @@ const RegisterPage = () => {
                     name={'phoneNumber'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='No. HP'
                             errorMessage={errors.phoneNumber?.message}
@@ -81,7 +81,7 @@ const RegisterPage = () => {
                     name={'hobby'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Hobi'
                             errorMessage={errors.hobby?.message}
@@ -91,7 +91,7 @@ const RegisterPage = () => {
                     name={'favFood'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Makanan Favorit'
                             errorMessage={errors.favFood?.message}
@@ -101,7 +101,7 @@ const RegisterPage = () => {
                     name={'favBeverage'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Minuman Favorit'
                             errorMessage={errors.favBeverage?.message}
@@ -111,7 +111,7 @@ const RegisterPage = () => {
                     name={'favBook'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Buku Favorit'
                             errorMessage={errors.favBook?.message}
@@ -121,7 +121,7 @@ const RegisterPage = () => {
                     name={'motto'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Moto Hidup'
                             errorMessage={errors.motto?.message}
@@ -131,7 +131,7 @@ const RegisterPage = () => {
                     name={'password'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Password'
                             errorMessage={errors.password?.message}
@@ -141,7 +141,7 @@ const RegisterPage = () => {
                     name={'confirmationPassword'}
                     defaultValue={''}
                     control={control}
-                    render={(onChange) => (
+                    render={({onChange}) => (
                         <Input
                             placeholder='Konfirmasi Password'
                             errorMessage={errors.confirmationPassword?.message}
