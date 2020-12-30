@@ -8,6 +8,14 @@ import request from './request';
 
 const validationSchema = yup.object({
     name: yup.string().required('Wajib diisi yup'),
+    age: yup.number().transform((val, oval) => {
+            // it seems react-hook-form send empty input as `string` instead of `undefined` (oval).
+            // Then, yup tried to parse it. So, it always get typeerror
+            //https://github.com/react-hook-form/react-hook-form/issues/330#issuecomment-569635842
+            //https://github.com/jquense/yup#mixedtransformcurrentvalue-any-originalvalue-any--any-schema
+            return typeof oval === "string" && oval.trim() === "" ? undefined : val
+        }
+    ).typeError('Wajib Angka BOs').required('Wajib diisi yup'),
     email: yup.string().required('Wajib diisi yup'),
     address: yup.string().required('Wajib diisi yup'),
     phoneNumber: yup.string().required('Wajib diisi yup'),
@@ -45,6 +53,17 @@ const RegisterPage = () => {
                         <Input
                             placeholder='Nama'
                             errorMessage={errors.name?.message}
+                            onChangeText={val => onChange(val)}/>
+                    )}/>
+                <Controller
+                    name={'age'}
+                    defaultValue={''}
+                    control={control}
+                    render={({onChange}) => (
+                        <Input
+                            placeholder='Umur'
+                            onBlur={event => onBlur(event)}
+                            errorMessage={errors.age?.message}
                             onChangeText={val => onChange(val)}/>
                     )}/>
                 <Controller
